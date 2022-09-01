@@ -1,0 +1,6 @@
+#!/bin/bash
+# Regenerate the data file for quick download:
+# 1. Remove the existing file
+# 2. Add new files recursively but without keeping folder structure
+rm -iv hpvsim_data.zip
+zip hpvsim_data.zip -R -j files/*
