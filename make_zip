@@ -2,5 +2,34 @@
 # Regenerate the data file for quick download:
 # 1. Remove the existing file
 # 2. Add new files recursively but without keeping folder structure
-rm -iv hpvsim_data.zip
-zip hpvsim_data.zip -R -j files/*
+
+import json
+
+# Make it easier to run bash commands
+def run(command, printinput=True, printoutput=True):
+    import subprocess as sp
+    if printinput: print(command)
+    std = sp.Popen(f'{command}', shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
+    stdout, stderr = std.communicate()
+    output = stdout.decode()
+    try:
+        output += stderr.decode()
+    except:
+        pass
+    if printoutput: print(output)
+    return output
+
+with open('files/metadata.json') as f:
+    metadata = json.load(f)
+version = metadata['version']
+
+
+data_file = f'hpvsim_data_v{version}.zip'
+run(f'zip {data_file} -R -j files/*')
+
+string = f'''
+Please next run:
+    git add {data_file}
+    git commit -m 'updated data'
+'''
+print(string)
