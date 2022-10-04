@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env python
 # Regenerate the data file for quick download:
 # 1. Remove the existing file
 # 2. Add new files recursively but without keeping folder structure
