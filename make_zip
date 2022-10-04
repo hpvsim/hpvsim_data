@@ -5,6 +5,10 @@
 
 import json
 
+ans = input('Did you remember to increment the version? y/[n] ')
+if ans != 'y':
+    raise ValueError('\nNo? OK, thanks for your honesty. Exiting.')
+
 # Make it easier to run bash commands
 def run(command, printinput=True, printoutput=True):
     import subprocess as sp
