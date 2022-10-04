@@ -31,5 +31,6 @@ string = f'''
 Please next run:
     git add {data_file}
     git commit -m 'updated data'
+    git push
 '''
 print(string)
