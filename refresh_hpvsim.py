@@ -1,11 +1,16 @@
 #/usr/bin/env python
 '''
-Download the data
+Remove and redownload the data
 '''
 
-
-import numpy as np
-import pandas as pd
 import sciris as sc
-import pylab as pl
-np; pd; sc; pl
+import hpvsim as hpv
+T = sc.timer()
+
+print('Removing data...')
+hpv.data.remove_data()
+
+print('Redownloading data...')
+hpv.data.quick_download(init=True)
+
+T.toc('Done')
