@@ -8,11 +8,10 @@ This repo uses GitLFS to avoid the issues with storing large data files on GitHu
 
 To update the data:
 
-1. Run `get_data.py` in HPVsim's `data` folder (NB: this script might be moved into this repo in future).
-2. Move the `.obj` files into the `files` subfolder here.
-3. Update the metadata in `files/metadata.json` -- **you must increment the version number**. 
-4. **Ensure the version number matches `hpvsim/data/get_data.py`.**
-5. Run `make_zip`
-6. Commit the new zip file and push.
-7. The new data will now be automatically used for all new HPVsim installs.
-8. To refresh an existing HPVsim installation, the easiest approach is to run `hpv.data.remove_data()`. It will then automatically re-download the next time HPVsim is imported.
+1. Update the metadata in `metadata.json` -- **you must increment the version number**. 
+2. **Ensure the version number matches `hpvsim/data/downloaders.py`.**
+3. Run `download_data.py`
+4. Run `make_zip`
+5. Commit the new zip file and push.
+6. The new data will now be automatically used for all new HPVsim installs.
+7. Run `refresh_hpvsim.py`. This will run `hpv.data.remove_data()`, and then redownload the data.
