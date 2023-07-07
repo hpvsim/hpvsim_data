@@ -4,20 +4,20 @@ Download the data
 '''
 
 import sciris as sc
-import hpvsim as hpv
+import hpvsim.data.downloaders as hdd
 
 # Set folder
 thisdir = sc.thispath()
 filesdir = thisdir / 'files'
-hpv.data.downloaders.set_filesdir(filesdir)
+hdd.set_filesdir(filesdir)
 
 # Check that things match
 md = sc.loadjson(thisdir / 'metadata.json')
 mdver = md['version']
-hpvver = hpv.data.downloaders.data_version
-assert mdver == hpvver, f'Versions do not match! Metadata = {mdver}, HPVsim = {hpvver}'
+hpvver = hdd.data_version
+assert sc.compareversions(mdver, hpvver) == 1, f'Metadata version {mdver} should be greater than HPVsim version {hpvver}'
 
 # Download new data
-hpv.data.get_data()
+hdd.get_data()
 
-print('Done; run make_zip next')
+print('Done; run make_zip.py next')
