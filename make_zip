@@ -3,7 +3,7 @@
 # 1. Remove the existing file
 # 2. Add new files recursively but without keeping folder structure
 
-import json
+import sciris as sc
 
 ans = input('Did you remember to increment the version? y/[n] ')
 if ans != 'y':
@@ -23,13 +23,12 @@ def run(command, printinput=True, printoutput=True):
     if printoutput: print(output)
     return output
 
-with open('files/metadata.json') as f:
-    metadata = json.load(f)
+mdfile = 'metadata.json'
+metadata = sc.loadjson(mdfile)
 version = metadata['version']
 
-
 data_file = f'hpvsim_data_v{version}.zip'
-run(f'zip {data_file} -R -j files/*')
+run(f'zip {data_file} -R -j {mdfile} files/*') # TODO: update to sc.savezip(), hard because of flags
 
 string = f'''
 Please next run:
