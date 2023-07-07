@@ -35,5 +35,7 @@ Please next run:
     git add {data_file}
     git commit -m 'updated data'
     git push
+
+Then remember to update data_version in HPVsim to use the new version: ({version}).
 '''
 print(string)
