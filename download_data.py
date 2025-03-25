@@ -1,10 +1,15 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 '''
 Download the data
 '''
 
 import sciris as sc
 import hpvsim.data.downloaders as hdd
+
+# Options
+force  = True
+tidy   = True
+serial = False
 
 # Set folder
 thisdir = sc.thispath()
@@ -15,9 +20,9 @@ hdd.set_filesdir(filesdir)
 md = sc.loadjson(thisdir / 'metadata.json')
 mdver = md['version']
 hpvver = hdd.data_version
-assert sc.compareversions(mdver, hpvver) == 1, f'Metadata version {mdver} should be greater than HPVsim version {hpvver}'
-
-# Download new data
-hdd.get_data()
-
-print('Done; run make_zip.py next')
+if sc.compareversions(mdver, hpvver) != 0:
+    errormsg = f'The typical workflow is to update the HPVsim data version {hpvver} first, then update the metadata version {mdver}. Please update to match, then rerun.'
+    raise ValueError(errormsg)
+else:
+    hdd.download_data(force=force, tidy=tidy, serial=serial) # Download new data
+    print('Done; run make_zip.py next')
